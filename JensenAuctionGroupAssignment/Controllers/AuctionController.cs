@@ -79,7 +79,7 @@ namespace JensenAuctionGroupAssignment.Controllers
             // Check if the search term is provided
             if (string.IsNullOrEmpty(searchTerm))
             {
-                return BadRequest("Search term is required.");
+                return BadRequest("Search term is required/ type a word to search.");
             }
 
             // Call the repository method to search auctions
