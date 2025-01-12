@@ -67,7 +67,7 @@ namespace JensenAuctionGroupAssignment.Controllers
 
 
         // Endpoint to get the highest bid for a specific auction
-        [HttpGet("Get_Highest_Bid_For_Auction/{auctionId}/depending_on_highest_Auction")]
+        [HttpGet("Get_Highest_Bid_For_Auction/{auctionId}/depending_on_highest_Bid")]
         public IActionResult GetHighestBidForAuction(int auctionId)
         {
             var highestBid = _bidRepository.GetHighestBidForAuction(auctionId);

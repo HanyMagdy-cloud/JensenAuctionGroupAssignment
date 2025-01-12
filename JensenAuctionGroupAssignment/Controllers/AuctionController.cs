@@ -31,7 +31,7 @@ namespace JensenAuctionGroupAssignment.Controllers
         }
 
         [HttpPost("Create_Auction")]
-        public IActionResult CreateAuction(CreateAuctionDTO auctionDTO)
+        public IActionResult CreateAuction([FromQuery]CreateAuctionDTO auctionDTO)
         {
             var auctionId = _auctionRepository.CreateAuction(auctionDTO);
             return Ok(new { AuctionID = auctionId });

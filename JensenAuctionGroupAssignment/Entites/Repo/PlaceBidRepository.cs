@@ -77,11 +77,26 @@ namespace JensenAuctionGroupAssignment.Entites.Repo
             {
                 connection.Open();
 
-                return connection.Query<Bid>(
-                    "dbo.GetBidsForAuction",
-                    new { AuctionID = auctionId },
-                    commandType: CommandType.StoredProcedure
-                ).AsList();
+                try
+                {
+                    // Call the stored procedure and return the results
+                    return connection.Query<Bid>(
+                        "dbo.GetBidsForAuction",
+                        new { AuctionID = auctionId },
+                        commandType: CommandType.StoredProcedure
+                    ).AsList();
+                }
+                catch (SqlException ex)
+                {
+                    // Handle custom SQL exception for non-existent auction
+                    if (ex.Number == 50001)
+                    {
+                        throw new InvalidOperationException("The auction does not exist.");
+                    }
+
+                    // Re-throw any other exceptions
+                    throw;
+                }
             }
         }
 
