@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JensenAuctionGroupAssignment", "JensenAuctionGroupAssignment\JensenAuctionGroupAssignment.csproj", "{CFDB5F2A-B494-40CD-94CD-AEC3EE63B5CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JensenAuctionGroupAssignment", "JensenAuctionGroupAssignment\JensenAuctionGroupAssignment.csproj", "{CFDB5F2A-B494-40CD-94CD-AEC3EE63B5CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JensenAuction.Tests", "JensenAuction.Tests\JensenAuction.Tests.csproj", "{34D63F5A-AC39-4E37-8D8F-18452E35E83D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit test", "Unit test", "{F9EE809C-B664-4B4B-AF94-CBE9B3C8623E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{CFDB5F2A-B494-40CD-94CD-AEC3EE63B5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFDB5F2A-B494-40CD-94CD-AEC3EE63B5CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFDB5F2A-B494-40CD-94CD-AEC3EE63B5CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34D63F5A-AC39-4E37-8D8F-18452E35E83D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34D63F5A-AC39-4E37-8D8F-18452E35E83D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34D63F5A-AC39-4E37-8D8F-18452E35E83D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34D63F5A-AC39-4E37-8D8F-18452E35E83D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{34D63F5A-AC39-4E37-8D8F-18452E35E83D} = {F9EE809C-B664-4B4B-AF94-CBE9B3C8623E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2216401E-6680-4663-98BF-8D5726145029}

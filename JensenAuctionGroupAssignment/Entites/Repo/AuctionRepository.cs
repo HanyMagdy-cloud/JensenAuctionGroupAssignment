@@ -72,7 +72,7 @@ namespace JensenAuctionGroupAssignment.Entites.Repo
             }
         }
 
-       
+
         public int UpdateAuctionByUserId(int auctionId, int userId, UpdateAuctionDTO auctionDTO)
         {
             using (var connection = _dbContext.GetConnection())
@@ -119,7 +119,7 @@ namespace JensenAuctionGroupAssignment.Entites.Repo
             }
         }
 
-        
+
 
         // Search auctions by title or description
         public List<AuctionDTO> SearchAuctions(string searchTerm)
@@ -163,6 +163,10 @@ namespace JensenAuctionGroupAssignment.Entites.Repo
                 return rowsAffected; // Return the number of rows affected
             }
         }
+
+
+
+
 
 
 
