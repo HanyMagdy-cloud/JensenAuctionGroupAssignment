@@ -89,18 +89,23 @@ namespace JensenAuctionGroupAssignment.Controllers
                 // Call the repository method to delete the bid
                 var rowsAffected = _bidRepository.DeleteBidById(bidId);
 
-                // Check if any rows were affected (bid was deleted)
+                // Check if any rows were affected
                 if (rowsAffected == 0)
                 {
-                    return NotFound("No bid found with the specified ID."); // Return 404 if no bid was found
+                    return NotFound("The bid does not exist.");
                 }
 
-                return Ok("Bid deleted successfully."); // Return success message
+                return Ok("Bid deleted successfully.");
+            }
+            catch (InvalidOperationException ex)
+            {
+                // Return a Bad Request for business logic errors
+                return BadRequest(new { Error = ex.Message });
             }
             catch (Exception ex)
             {
-                // Handle any unexpected errors
-                return StatusCode(500, $"An error occurred while deleting the bid: {ex.Message}");
+                // Handle unexpected errors
+                return StatusCode(500, new { Error = "An unexpected error occurred.", Details = ex.Message });
             }
         }
 

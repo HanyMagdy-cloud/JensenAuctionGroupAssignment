@@ -134,16 +134,35 @@ namespace JensenAuctionGroupAssignment.Entites.Repo
         // Deletes a bid by its BidID
         public int DeleteBidById(int bidId)
         {
-            using (var connection = _dbContext.GetConnection()) // Get the database connection
+            using (var connection = _dbContext.GetConnection())
             {
-                connection.Open(); // Open the connection
+                connection.Open();
 
-                // Execute the stored procedure and return the number of rows affected
-                return connection.Execute(
-                    "dbo.DeleteBidById", // Stored procedure name
-                    new { BidID = bidId }, // Pass the BidID as a parameter
-                    commandType: CommandType.StoredProcedure // Specify that we're calling a stored procedure
-                );
+                try
+                {
+                    // Execute the stored procedure
+                    return connection.Execute(
+                        "dbo.DeleteBidById", // Stored procedure name
+                        new { BidID = bidId }, // Pass the BidID as a parameter
+                        commandType: CommandType.StoredProcedure // Specify that we're calling a stored procedure
+                    );
+                }
+                catch (SqlException ex)
+                {
+                    // Handle custom SQL exceptions
+                    if (ex.Number == 50001)
+                    {
+                        throw new InvalidOperationException("The bid does not exist.");
+                    }
+
+                    if (ex.Number == 50002)
+                    {
+                        throw new InvalidOperationException("The auction is closed. You cannot delete a bid.");
+                    }
+
+                    // Re-throw unexpected exceptions
+                    throw;
+                }
             }
         }
 
