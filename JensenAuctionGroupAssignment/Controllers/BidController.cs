@@ -53,17 +53,32 @@ namespace JensenAuctionGroupAssignment.Controllers
 
         // Endpoint to get all bids for a specific auction
         [HttpGet("get_all_bids_for_a_specific_auction/{auctionId}")]
+        [HttpGet("{auctionId}/bids")]
         public IActionResult GetBidsForAuction(int auctionId)
         {
-            var bids = _bidRepository.GetBidsForAuction(auctionId);
-
-            if (bids == null || bids.Count == 0)
+            try
             {
-                return NotFound("No bids found for this auction.");
-            }
+                var bids = _bidRepository.GetBidsForAuction(auctionId);
 
-            return Ok(bids);
+                if (bids.Count == 0)
+                {
+                    return NotFound($"No bids found for auction with ID {auctionId}.");
+                }
+
+                return Ok(bids); // Return the list of bids
+            }
+            catch (InvalidOperationException ex)
+            {
+                // Return a 404 Not Found response if the auction does not exist
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                // Handle unexpected errors
+                return StatusCode(500, new { Error = "An unexpected error occurred.", Details = ex.Message });
+            }
         }
+
 
 
         // Endpoint to get the highest bid for a specific auction

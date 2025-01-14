@@ -71,6 +71,36 @@ namespace JensenAuctionGroupAssignment.Entites.Repo
 
 
         // Retrieves all bids for a specific auction
+        //public List<Bid> GetBidsForAuction(int auctionId)
+        //{
+        //    using (var connection = _dbContext.GetConnection())
+        //    {
+        //        connection.Open();
+
+        //        try
+        //        {
+        //            // Call the stored procedure and return the results
+        //            return connection.Query<Bid>(
+        //                "dbo.GetBidsForAuction",
+        //                new { AuctionID = auctionId },
+        //                commandType: CommandType.StoredProcedure
+        //            ).AsList();
+        //        }
+        //        catch (SqlException ex)
+        //        {
+        //            // Handle custom SQL exception for non-existent auction
+        //            if (ex.Number == 50001)
+        //            {
+        //                throw new InvalidOperationException("The auction does not exist.");
+        //            }
+
+        //            // Re-throw any other exceptions
+        //            throw;
+        //        }
+        //    }
+        //}
+
+
         public List<Bid> GetBidsForAuction(int auctionId)
         {
             using (var connection = _dbContext.GetConnection())
@@ -80,18 +110,26 @@ namespace JensenAuctionGroupAssignment.Entites.Repo
                 try
                 {
                     // Call the stored procedure and return the results
-                    return connection.Query<Bid>(
+                    var bids = connection.Query<Bid>(
                         "dbo.GetBidsForAuction",
                         new { AuctionID = auctionId },
                         commandType: CommandType.StoredProcedure
                     ).AsList();
+
+                    // If no bids are returned but the auction exists, return an empty list
+                    if (bids == null || bids.Count == 0)
+                    {
+                        return new List<Bid>(); // Return an empty list if no bids exist
+                    }
+
+                    return bids;
                 }
                 catch (SqlException ex)
                 {
                     // Handle custom SQL exception for non-existent auction
-                    if (ex.Number == 50001)
+                    if (ex.Number == 50001) // SQL error number for "auction does not exist"
                     {
-                        throw new InvalidOperationException("The auction does not exist.");
+                        throw new InvalidOperationException($"Auction with ID {auctionId} was not found."); // Custom message
                     }
 
                     // Re-throw any other exceptions
@@ -99,6 +137,7 @@ namespace JensenAuctionGroupAssignment.Entites.Repo
                 }
             }
         }
+
 
         // Retrieves the highest bid for a specific auction
         public Bid? GetHighestBidForAuction(int auctionId)
