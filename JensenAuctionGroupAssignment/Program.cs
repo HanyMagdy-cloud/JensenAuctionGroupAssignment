@@ -8,6 +8,24 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    //CORS
+    options.AddPolicy("AllowSpecificOrigins", policy =>
+    {
+        policy.WithOrigins("http://localhost:5074/index.html") // Allow only this domain
+              .AllowAnyHeader()                  // Allow all headers
+              .AllowAnyMethod();                 // Allow GET, POST, PUT, DELETE etc.
+    });
+
+    options.AddPolicy("AllowAllOrigins", policy =>
+    {
+        policy.AllowAnyOrigin() // Allow all origins
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 // Add controllers
 builder.Services.AddControllers();
 
@@ -84,6 +102,9 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
+
+// Activate CORS
+app.UseCors("AllowSpecificOrigins");
 
 // Enable Swagger and Swagger UI
 app.UseSwagger();

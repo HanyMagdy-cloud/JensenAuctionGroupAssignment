@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 
 namespace JensenAuctionGroupAssignment
 {
-    public class JensenContext:IJensenAuction
+    public class JensenContext : IJensenAuction
     {
         // Private field to hold the connection string for the database.
         private readonly string _connString;

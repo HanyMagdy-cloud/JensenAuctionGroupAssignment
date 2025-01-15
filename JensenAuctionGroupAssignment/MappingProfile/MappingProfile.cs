@@ -19,6 +19,8 @@ namespace JensenAuctionGroupAssignment.MappingProfile
             // Bid mappings
             CreateMap<Bid, BidDTO>(); // Maps Bid -> BidDTO
             CreateMap<PlaceBidDTO, Bid>(); // Maps PlaceBidDTO -> Bid
+
+
         }
     }
 }
