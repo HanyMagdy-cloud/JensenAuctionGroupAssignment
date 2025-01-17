@@ -34,6 +34,7 @@ namespace JensenAuctionGroupAssignment.Entites.Repo
                             bid.AuctionID, // Auction ID
                             bid.UserID, // User ID
                             bid.BidAmount // Bid Amount
+                            
                         },
                         commandType: CommandType.StoredProcedure
                     );
@@ -69,36 +70,6 @@ namespace JensenAuctionGroupAssignment.Entites.Repo
             }
         }
 
-
-        // Retrieves all bids for a specific auction
-        //public List<Bid> GetBidsForAuction(int auctionId)
-        //{
-        //    using (var connection = _dbContext.GetConnection())
-        //    {
-        //        connection.Open();
-
-        //        try
-        //        {
-        //            // Call the stored procedure and return the results
-        //            return connection.Query<Bid>(
-        //                "dbo.GetBidsForAuction",
-        //                new { AuctionID = auctionId },
-        //                commandType: CommandType.StoredProcedure
-        //            ).AsList();
-        //        }
-        //        catch (SqlException ex)
-        //        {
-        //            // Handle custom SQL exception for non-existent auction
-        //            if (ex.Number == 50001)
-        //            {
-        //                throw new InvalidOperationException("The auction does not exist.");
-        //            }
-
-        //            // Re-throw any other exceptions
-        //            throw;
-        //        }
-        //    }
-        //}
 
 
         public List<Bid> GetBidsForAuction(int auctionId)

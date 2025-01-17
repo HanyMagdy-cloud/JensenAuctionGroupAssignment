@@ -15,10 +15,17 @@ namespace JensenAuctionGroupAssignment.Entites.Repo
         // Constructor that takes IUserRepository and the JWT secret key
         public AuthService(IUserRepository userRepository, string jwtSecret)
         {
+            // Ensure userRepository is not null; throw an exception if it is
+
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
+
+            // Ensure jwtSecret is not null; throw an exception if it is
+
             _jwtSecret = jwtSecret ?? throw new ArgumentNullException(nameof(jwtSecret));
         }
 
+
+        // Method to authenticate a user and generate a JWT token
         public string Authenticate(string username, string password)
         {
             // Validate user credentials
@@ -34,6 +41,8 @@ namespace JensenAuctionGroupAssignment.Entites.Repo
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
+                // Define the claims for the token
+
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, user.UserID.ToString()), // Add UserID as Name claim
@@ -46,6 +55,9 @@ namespace JensenAuctionGroupAssignment.Entites.Repo
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            // Serialize the token to a string and return it
+
             return tokenHandler.WriteToken(token); // Return the generated JWT token
         }
     }

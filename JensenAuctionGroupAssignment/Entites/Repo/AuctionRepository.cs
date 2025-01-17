@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using JensenAuctionGroupAssignment.Dto;
 using JensenAuctionGroupAssignment.Interfaces;
+using System;
 using System.Data;
 
 namespace JensenAuctionGroupAssignment.Entites.Repo
@@ -24,8 +25,11 @@ namespace JensenAuctionGroupAssignment.Entites.Repo
                 connection.Open(); // Open the connection
 
                 // Call the stored procedure to insert a new auction
+                // ExecuteScalar is used to return a single value
                 return connection.ExecuteScalar<int>(
                     "dbo.CreateAuction", // Stored procedure name
+
+                     // an anonymous object used to pass parameters to the stored procedure.
                     new
                     {
                         auctionDTO.Title, // Map DTO Title to stored procedure parameter

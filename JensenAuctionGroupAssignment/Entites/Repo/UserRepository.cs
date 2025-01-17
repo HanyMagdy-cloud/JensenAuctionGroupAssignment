@@ -21,6 +21,8 @@ namespace JensenAuctionGroupAssignment.Entites.Repo
             {
                 connection.Open();
 
+                // Create a DynamicParameters object to pass parameters to the stored procedure
+
                 var parameters = new DynamicParameters();
                 parameters.Add("@Username", username);
                 parameters.Add("@Password", password);

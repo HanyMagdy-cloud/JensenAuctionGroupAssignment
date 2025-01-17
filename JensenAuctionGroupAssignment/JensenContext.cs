@@ -23,13 +23,7 @@ namespace JensenAuctionGroupAssignment
 
         public SqlConnection GetConnection()
         {
-            // Ensure the connection string is initialized before returning the connection
-            //if (string.IsNullOrEmpty(_connString))
-            //{
-            //    throw new InvalidOperationException("The connection string has not been initialized.");
-            //}
-
-            //return new SqlConnection(_connString);
+           
 
             if (string.IsNullOrEmpty(_connString))
             {
